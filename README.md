@@ -12,15 +12,16 @@ Enterprise multi-agent marketing platform for SEO, AEO, content, social, PPC, an
 
 ## Deploy on Railway
 
-See **[docs/deploy/RAILWAY.md](docs/deploy/RAILWAY.md)** for a full multi-service setup (`api` + `web` + Postgres).
+**Separate project:** DigiSEO lives on its own GitHub repo and Railway project (not digicane-systems).
 
-Quick outline:
+| Resource | URL |
+|----------|-----|
+| GitHub | https://github.com/varundigicane/digiseo-ai |
+| Railway project | `digiseo-ai` |
+| API | https://api-production-4a88.up.railway.app |
+| Web | https://web-production-faa9d.up.railway.app |
 
-1. Push to GitHub → New Railway project
-2. Add **PostgreSQL** plugin
-3. Service **api** — Root Directory `apps/api` (Dockerfile)
-4. Service **web** — Root Directory `apps/web` (Dockerfile)
-5. Set `DATABASE_URL` on api from Postgres; set `NEXT_PUBLIC_API_URL` / `WEB_URL` / `CORS_ORIGINS` to your Railway domains
+See **[docs/deploy/RAILWAY.md](docs/deploy/RAILWAY.md)** for full multi-service setup (`api` + `web` + Postgres). Root directories: `apps/api`, `apps/web`.
 
 ## Quick start
 
