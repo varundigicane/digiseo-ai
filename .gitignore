@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Env & secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Next.js
+apps/web/.next/
+apps/web/out/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs & coverage
+*.log
+coverage/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Docker volumes
+infra/docker/data/
+
+# Local SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated
+*.pyc
+.turbo/
+.cache/

@@ -1,0 +1,4 @@
+# Optional Nixpacks config — Dockerfile is preferred on Railway.
+
+[start]
+cmd = "npm run start"
