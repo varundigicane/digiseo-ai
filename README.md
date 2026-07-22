@@ -87,6 +87,23 @@ python -m worker.main
 | [docs/architecture/DIAGRAMS.md](docs/architecture/DIAGRAMS.md) | Mermaid diagram pack |
 | [docs/agents/README.md](docs/agents/README.md) | Agent catalog |
 | [docs/deploy/RAILWAY.md](docs/deploy/RAILWAY.md) | Railway deploy |
+| [docs/testing/E2E_TEST_PLAN.md](docs/testing/E2E_TEST_PLAN.md) | E2E test cases |
+
+## Tests
+
+```bash
+# API (pytest) — uses isolated SQLite + MOCK_LLM/MOCK_CRAWL
+cd apps/api
+pip install -r requirements.txt -r requirements-dev.txt
+python -m pytest tests -q
+# or from root: npm run test:api
+
+# UI E2E (Playwright) — start API on :8000 first
+cd apps/web
+npm install
+npx playwright install chromium
+npm run test:e2e
+```
 
 ## License
 

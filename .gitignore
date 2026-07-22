@@ -37,6 +37,10 @@ coverage/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+apps/web/test-results/
+apps/web/playwright-report/
+apps/web/blob-report/
+apps/web/playwright/.cache/
 
 # Docker volumes
 infra/docker/data/

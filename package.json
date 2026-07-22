@@ -11,6 +11,8 @@
     "dev:web": "npm run dev --workspace=apps/web",
     "build:web": "npm run build --workspace=apps/web",
     "lint": "npm run lint --workspace=apps/web",
+    "test:api": "cd apps/api && .venv/Scripts/python.exe -m pytest tests -q",
+    "test:e2e": "npm run test:e2e --workspace=apps/web",
     "docker:up": "docker compose -f infra/docker/docker-compose.yml up -d",
     "docker:down": "docker compose -f infra/docker/docker-compose.yml down"
   },

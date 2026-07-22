@@ -106,7 +106,13 @@ class Settings(BaseSettings):
         return self
 
     def cors_allow_origins(self) -> list[str]:
-        origins = {self.WEB_URL, "http://localhost:3000"}
+        origins = {
+            self.WEB_URL,
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "http://localhost:3010",
+            "http://127.0.0.1:3010",
+        }
         for part in self.CORS_ORIGINS.split(","):
             o = part.strip()
             if o:
