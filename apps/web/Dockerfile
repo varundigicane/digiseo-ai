@@ -1,5 +1,5 @@
-# DigiSEO Web — Next.js standalone for Railway
-# Railway: Root Directory = apps/web, Dockerfile path = Dockerfile
+# DigiSEO Web — Railway Root Directory = apps/web
+# CLI: railway up ./apps/web --path-as-root --service web
 
 FROM node:22-alpine AS deps
 WORKDIR /app
@@ -11,7 +11,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build-time public env (override in Railway service variables)
 ARG NEXT_PUBLIC_API_URL=http://localhost:8000
 ARG NEXT_PUBLIC_APP_URL=http://localhost:3000
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \

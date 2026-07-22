@@ -46,6 +46,11 @@ infra/docker/data/
 *.sqlite
 *.sqlite3
 
+# Railway local / agent scratch
+.railway/
+.railway-config-pull-*/
+.agents/
+
 # Generated
 *.pyc
 .turbo/
