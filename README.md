@@ -76,6 +76,18 @@ python -m worker.main
 
 1. Website SEO · 2. AEO · 3. Content · 4. Social · 5. Competitor · 6. Keywords · 7. Backlink · 8. PPC · 9. Analytics · 10. Local SEO
 
+## Documentation
+
+| Doc | Description |
+|-----|-------------|
+| [docs/README.md](docs/README.md) | Documentation index |
+| [docs/USER_GUIDE.md](docs/USER_GUIDE.md) | End-user guide |
+| [docs/functional/FUNCTIONAL_SPEC.md](docs/functional/FUNCTIONAL_SPEC.md) | Functional spec & use cases |
+| [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) | System architecture |
+| [docs/architecture/DIAGRAMS.md](docs/architecture/DIAGRAMS.md) | Mermaid diagram pack |
+| [docs/agents/README.md](docs/agents/README.md) | Agent catalog |
+| [docs/deploy/RAILWAY.md](docs/deploy/RAILWAY.md) | Railway deploy |
+
 ## License
 
 Proprietary — Digicane Systems
