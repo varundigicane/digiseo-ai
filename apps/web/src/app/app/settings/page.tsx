@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 
@@ -76,7 +77,9 @@ export default function SettingsPage() {
   return (
     <div>
       <h1 className="font-display text-3xl">Settings</h1>
-      <p className="mt-2 text-muted">Integrations, white-label, API access, and SSO.</p>
+      <p className="mt-2 text-muted">
+        Integrations, white-label, API access, SSO, and partner handoffs.
+      </p>
 
       <h2 className="mt-8 font-display text-xl">Integrations</h2>
       <div className="mt-3 flex flex-wrap gap-2">
@@ -98,6 +101,47 @@ export default function SettingsPage() {
           </li>
         ))}
       </ul>
+
+      <h2 className="mt-10 font-display text-xl">Web Design & Development (partner)</h2>
+      <p className="mt-2 max-w-xl text-sm text-muted">
+        DigiSEO does not sell hosting or builds. Export CWV / design briefs for your web partner.
+        Typical partner scope: responsive build, 1-year hosting, post-launch maintenance.
+      </p>
+      <button
+        type="button"
+        className="mt-3 border border-[var(--line)] px-3 py-2 text-sm hover:border-accent/40"
+        onClick={() => {
+          const brief = {
+            type: "web_design_partner_brief",
+            requested_at: new Date().toISOString(),
+            items: [
+              "Responsive redesign from On-Page CWV issues",
+              "Hosting (1 year) — partner-provided",
+              "Post-launch maintenance retainer",
+              "Core Web Vitals remediation tickets",
+            ],
+          };
+          const blob = new Blob([JSON.stringify(brief, null, 2)], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "digiseo-web-design-brief.json";
+          a.click();
+          URL.revokeObjectURL(url);
+          setMsg("Web design partner brief downloaded");
+        }}
+      >
+        Export design / CWV brief
+      </button>
+
+      <h2 className="mt-10 font-display text-xl">Reporting & Support pack (Enterprise)</h2>
+      <p className="mt-2 text-sm text-muted">
+        Weekly/monthly cadence, strategy call notes, white-label AM experience — agency supplies the
+        human account manager.
+      </p>
+      <Link href="/app/reporting" className="mt-2 inline-block text-sm text-accent">
+        Open Reporting →
+      </Link>
 
       <h2 className="mt-10 font-display text-xl">Enterprise</h2>
       <div className="mt-3 flex flex-wrap gap-3">

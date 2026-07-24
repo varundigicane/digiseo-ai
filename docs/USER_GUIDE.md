@@ -9,14 +9,20 @@
 
 ## 1. What DigiSEO AI does
 
-DigiSEO AI is a self-serve multi-agent marketing platform. Instead of one chatbot, you get a team of specialists that:
+DigiSEO AI is an **AI Growth OS** for SMBs and agencies. Work follows a delivery hierarchy:
 
-1. Audit and improve **website SEO**
-2. Optimize for **answer engines** (ChatGPT, Google AI Overviews, Perplexity, Gemini, Claude, Bing Copilot)
-3. Generate **content** (blogs, landing pages, and more)
-4. Run **social**, **competitor**, **keyword**, **backlink**, **PPC**, **analytics**, and **local SEO** workflows (by plan)
+1. **Strategy & Audit** — site crawl, technical audit, keywords, competitors, persona  
+2. **AI SEO + On-Page** — AEO/GEO/SGE readiness and on-page checklist  
+3. **Content** — writing specialist for blogs, landing pages, and more  
+4. **CRO** — funnel and landing briefs, A/B plans (Professional+)  
+5. **Off-Page + Local** — backlinks/outreach and GBP (Business+)  
+6. **Paid + SMM + Email** — Google/Meta ads drafts, social, email plans (by plan)  
+7. **Reporting** — dashboard and strategy notes  
 
-Every outbound change (meta tags, schema, social replies, CMS publishes) goes through **human approval** unless Business+ auto-apply is enabled.
+Keywords, competitors, backlinks, and analytics are **capabilities inside these pillars**, not separate products.  
+Web design & hosting are **partner-only** (export brief from Settings).
+
+Every outbound change goes through **human approval** unless Business+ auto-apply is enabled.
 
 ---
 
@@ -24,10 +30,10 @@ Every outbound change (meta tags, schema, social replies, CMS publishes) goes th
 
 | Plan | Price | Monthly credits | Best for |
 |------|-------|-----------------|----------|
-| Starter | $49/mo | 500 | SEO + AEO audits, blogs, GSC |
-| Professional | $149/mo | 2,000 | Social, calendar, analytics, competitors |
-| Business | $399/mo | 8,000 | Multi-agent workflows, PPC, outreach, API |
-| Enterprise | Custom | 50,000+ | White-label, SSO, high limits |
+| Starter | $49/mo | 500 | Strategy, AI SEO, On-Page, blogs |
+| Professional | $149/mo | 2,000 | CRO, SMM, reporting, competitors |
+| Business | $399/mo | 8,000 | Off-Page, Local, Paid, Email, Growth Playbook |
+| Enterprise | Custom | 50,000+ | White-label agency mode, SSO |
 
 Upgrade anytime under **Billing**. Credit packs can be purchased as add-ons.
 
@@ -41,32 +47,27 @@ Upgrade anytime under **Billing**. Credit packs can be purchased as add-ons.
 2. Enter name, email, password, company, and workspace name
 3. You land on the **Campaign board** with a Starter trial and credits
 
-### Step 2 — Connect your website
+### Step 2 — Strategy & Audit
 
-1. Go to **Onboarding**
-2. Enter your site URL (e.g. `https://example.com`)
-3. Click **Connect & crawl**
-4. DigiSEO fetches robots.txt / sitemap signals, crawls pages, and indexes content chunks for AEO
+1. Go to **Strategy & Audit**
+2. Enter your site URL → **Connect & crawl**
+3. Optionally run keyword clustering and add competitors (Pro+)
 
-### Step 3 — Run SEO + AEO
+### Step 3 — AI SEO + On-Page
 
-1. Open **SEO / AEO**
-2. Select your site
-3. Click **Run seo**, then **Run aeo**, then **Run keyword**
-4. Review scores, issues, and proposed fixes
+1. Open **AI SEO** → Run AEO / GEO  
+2. Open **On-Page SEO** → Run on-page audit  
+3. Review scores and proposed fixes
 
 ### Step 4 — Generate content
 
-1. Open **Content**
-2. Choose type (blog, landing, case study, etc.), topic, and keywords
-3. Click **Generate**
-4. Edit the draft; export Markdown/HTML as needed
+1. Open **Content Studio**
+2. Choose type, topic, and keywords → **Generate**
 
 ### Step 5 — Approve changes
 
 1. Open **Approvals**
-2. Review proposed meta/schema/internal-link changes
-3. **Approve** or **Reject** each item
+2. **Approve** or **Reject** each item
 
 ---
 
@@ -74,17 +75,22 @@ Upgrade anytime under **Billing**. Credit packs can be purchased as add-ons.
 
 | Nav item | Purpose |
 |----------|---------|
-| Overview | Campaign board — sites, scores, credits |
-| Onboarding | Connect site + crawl + GSC mock/connect |
-| SEO / AEO | Technical/on-page audit + answer-engine report |
-| Content | Content studio + calendar (Pro+) |
-| Social | Posts, hashtags, scripts, publish (Pro+) |
-| Competitors | Watchlist + scan events (Pro+) |
-| Analytics | GA4/GSC-style dashboard (Pro+) |
+| Overview | Campaign board + hierarchy shortcuts |
+| Strategy & Audit | Crawl, keywords, competitors, persona |
+| AI SEO | AEO/GEO, clusters, AI competitor intel |
+| On-Page SEO | Meta, schema, CWV, links, FAQ, E-E-A-T checklist |
+| Content Studio | Writing specialist + calendar (Pro+) |
+| CRO | Funnel / LPO / A/B briefs (Pro+) |
+| Off-Page SEO | Backlinks & outreach (Business+) |
+| Local SEO | GBP / citations / reviews (Business+) |
+| Paid Media | Google + Meta + LinkedIn drafts (Business+) |
+| Social (SMM) | Posts & publish (Pro+) |
+| Email | Campaigns & drips (Business+) |
+| Reporting | Dashboard + strategy notes (Pro+) |
+| Growth Playbook | Full hierarchy orchestration (Business+) |
 | Approvals | Human-in-the-loop change requests |
-| Workflows | Multi-agent “Launch product” (Business+) |
 | Billing | Plans, credits, upgrades |
-| Settings | Integrations, API key, white-label, SSO |
+| Settings | Integrations, partner web-design brief, enterprise |
 
 ---
 

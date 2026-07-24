@@ -10,6 +10,7 @@ from app.api.v1 import (
     content,
     crawl,
     enterprise,
+    growth,
     integrations,
     local_seo,
     outreach,
@@ -36,5 +37,6 @@ api_router.include_router(analytics.router, prefix="/analytics", tags=["analytic
 api_router.include_router(outreach.router, prefix="/outreach", tags=["outreach"])
 api_router.include_router(ppc.router, prefix="/ppc", tags=["ppc"])
 api_router.include_router(local_seo.router, prefix="/local-seo", tags=["local-seo"])
+api_router.include_router(growth.router, prefix="/growth", tags=["growth"])
 api_router.include_router(workflows.router, prefix="/workflows", tags=["workflows"])
 api_router.include_router(enterprise.router, prefix="/enterprise", tags=["enterprise"])

@@ -7,14 +7,19 @@ import { api, clearSession, getSession } from "@/lib/api";
 
 const NAV = [
   { href: "/app", label: "Overview" },
-  { href: "/app/onboarding", label: "Onboarding" },
-  { href: "/app/audit", label: "SEO / AEO" },
-  { href: "/app/content", label: "Content" },
-  { href: "/app/social", label: "Social" },
-  { href: "/app/competitors", label: "Competitors" },
-  { href: "/app/analytics", label: "Analytics" },
+  { href: "/app/strategy", label: "Strategy & Audit" },
+  { href: "/app/ai-seo", label: "AI SEO" },
+  { href: "/app/on-page", label: "On-Page SEO" },
+  { href: "/app/content", label: "Content Studio" },
+  { href: "/app/cro", label: "CRO" },
+  { href: "/app/off-page", label: "Off-Page SEO" },
+  { href: "/app/local", label: "Local SEO" },
+  { href: "/app/paid", label: "Paid Media" },
+  { href: "/app/social", label: "Social (SMM)" },
+  { href: "/app/email", label: "Email" },
+  { href: "/app/reporting", label: "Reporting" },
+  { href: "/app/playbook", label: "Growth Playbook" },
   { href: "/app/approvals", label: "Approvals" },
-  { href: "/app/workflows", label: "Workflows" },
   { href: "/app/billing", label: "Billing" },
   { href: "/app/settings", label: "Settings" },
 ];
@@ -50,9 +55,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <Link href="/" className="font-display text-xl text-accent">
           DigiSEO AI
         </Link>
-        <nav className="mt-8 space-y-1 text-sm">
+        <nav className="mt-8 max-h-[70vh] space-y-1 overflow-y-auto text-sm">
           {NAV.map((item) => {
-            const active = pathname === item.href;
+            const active =
+              item.href === "/app"
+                ? pathname === "/app"
+                : pathname === item.href || pathname.startsWith(item.href + "/");
             return (
               <Link
                 key={item.href}
@@ -67,7 +75,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           })}
         </nav>
         {me && (
-          <div className="mt-10 border-t border-[var(--line)] pt-4 text-xs text-muted">
+          <div className="mt-6 border-t border-[var(--line)] pt-4 text-xs text-muted">
             <div className="text-ink">{me.user.full_name}</div>
             <div className="mt-1 capitalize">{me.subscription.tier}</div>
             <div className="mt-1">{me.subscription.credits_balance} credits</div>

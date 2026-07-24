@@ -10,6 +10,16 @@ from app.models import Membership, Role
 from tests.conftest import auth_dict
 
 
+async def test_starter_cro_forbidden(client: AsyncClient, auth_headers: dict):
+    h = await auth_dict(auth_headers)
+    res = await client.post(
+        "/api/v1/growth/cro",
+        headers=h,
+        json={"workspace_id": auth_headers["workspace_id"], "goal": "CRO"},
+    )
+    assert res.status_code == 403
+
+
 async def test_starter_social_forbidden(client: AsyncClient, auth_headers: dict):
     """E2E-P1-01"""
     h = await auth_dict(auth_headers)
@@ -23,6 +33,28 @@ async def test_starter_social_forbidden(client: AsyncClient, auth_headers: dict)
         },
     )
     assert res.status_code == 403
+
+
+async def test_starter_email_forbidden(client: AsyncClient, auth_headers: dict):
+    h = await auth_dict(auth_headers)
+    res = await client.post(
+        "/api/v1/growth/email",
+        headers=h,
+        json={"workspace_id": auth_headers["workspace_id"], "topic": "nurture"},
+    )
+    assert res.status_code == 403
+
+
+async def test_pro_cro_ok(client: AsyncClient, auth_headers: dict):
+    h = await auth_dict(auth_headers)
+    await client.post("/api/v1/billing/checkout", headers=h, json={"tier": "professional"})
+    res = await client.post(
+        "/api/v1/growth/cro",
+        headers=h,
+        json={"workspace_id": auth_headers["workspace_id"], "offer": "trial"},
+    )
+    assert res.status_code == 200, res.text
+    assert "funnel_strategy" in res.json() or "ab_tests" in res.json()
 
 
 async def test_starter_workflows_forbidden(client: AsyncClient, auth_headers: dict):

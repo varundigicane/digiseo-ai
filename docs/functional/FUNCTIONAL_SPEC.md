@@ -77,20 +77,22 @@ flowchart TB
 | UC-08 | Keyword research from GSC | All |
 | UC-09 | Social post generation | Professional+ |
 | UC-10 | Content calendar | Professional+ |
-| UC-11 | Competitor watchlist + scan | Professional+ |
-| UC-12 | Analytics dashboard | Professional+ |
+| UC-11 | Competitor watchlist + scan (under Strategy) | Professional+ |
+| UC-12 | Reporting dashboard | Professional+ |
 | UC-13 | CMS / analytics integrations | Professional+ |
+| UC-21 | CRO briefs | Professional+ |
 
 ### P2 — Advanced
 | ID | Use case | Plan |
 |----|----------|------|
-| UC-14 | Multi-agent launch workflow | Business+ |
-| UC-15 | Backlink discovery + outreach | Business+ |
-| UC-16 | PPC campaign drafts | Business+ |
+| UC-14 | Growth Playbook / multi-agent | Business+ |
+| UC-15 | Off-Page / backlink outreach | Business+ |
+| UC-16 | Paid Media (Google + Meta) | Business+ |
 | UC-17 | Local SEO optimize | Business+ |
 | UC-18 | API key access | Business+ |
 | UC-19 | Auto-apply approved changes | Business+ |
 | UC-20 | White-label + SSO | Enterprise |
+| UC-22 | Email marketing plans | Business+ |
 
 ## 5. Functional flow — SEO to publish
 

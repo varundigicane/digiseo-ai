@@ -41,7 +41,7 @@ export default function AppHome() {
     <div>
       <h1 className="font-display text-3xl">Campaign board</h1>
       <p className="mt-2 text-muted">
-        Your multi-agent marketing workspace
+        Growth hierarchy workspace
         {me ? ` · ${me.subscription.credits_balance} credits remaining` : ""}
       </p>
 
@@ -72,21 +72,36 @@ export default function AppHome() {
         ))}
       </div>
 
+      <ol className="mt-8 max-w-xl space-y-2 text-sm text-muted">
+        <li>1. Strategy & Audit</li>
+        <li>2. AI SEO + On-Page</li>
+        <li>3. Content → CRO</li>
+        <li>4. Off-Page + Local</li>
+        <li>5. Paid + SMM + Email</li>
+        <li>6. Reporting</li>
+      </ol>
+
       <div className="mt-10 flex flex-wrap gap-3">
-        <Link href="/app/onboarding" className="bg-accent px-4 py-2 font-medium text-[#04140e]">
-          Connect a site
+        <Link href="/app/strategy" className="bg-accent px-4 py-2 font-medium text-[#04140e]">
+          Strategy & Audit
         </Link>
         <Link
-          href="/app/audit"
+          href="/app/ai-seo"
           className="border border-[var(--line)] px-4 py-2 text-ink hover:border-accent/40"
         >
-          Run SEO / AEO
+          AI SEO
         </Link>
         <Link
-          href="/app/content"
+          href="/app/on-page"
           className="border border-[var(--line)] px-4 py-2 text-ink hover:border-accent/40"
         >
-          Content studio
+          On-Page
+        </Link>
+        <Link
+          href="/app/playbook"
+          className="border border-[var(--line)] px-4 py-2 text-ink hover:border-accent/40"
+        >
+          Growth Playbook
         </Link>
       </div>
 

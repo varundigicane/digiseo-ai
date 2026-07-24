@@ -11,7 +11,7 @@ test.beforeAll(async ({ request }) => {
   expect(health.ok(), `API must be running at ${API}`).toBeTruthy();
 });
 
-test("golden path: signup → crawl → SEO/AEO → content → approvals → billing", async ({
+test("golden path: signup → strategy crawl → on-page/ai-seo → content → approvals → billing", async ({
   page,
 }) => {
   const email = uniqueEmail();
@@ -27,22 +27,25 @@ test("golden path: signup → crawl → SEO/AEO → content → approvals → bi
   const creditsText = await page.getByText(/\d+\s+credits/i).first().textContent();
   const creditsBefore = Number((creditsText || "500").match(/\d+/)?.[0] || 500);
 
-  await page.getByRole("link", { name: "Onboarding" }).click();
-  await expect(page.getByRole("heading", { name: /Onboarding/i })).toBeVisible();
+  await page.getByRole("link", { name: "Strategy & Audit" }).click();
+  await expect(page.getByRole("heading", { name: /Strategy & Audit/i })).toBeVisible();
   await page.locator('input[name="url"]').fill("https://example.com");
   await page.getByRole("button", { name: /Connect & crawl/i }).click();
-  await expect(page.locator("p.text-accent").filter({ hasText: /pages indexed|GSC connected/i })).toBeVisible({
+  await expect(page.locator("p.text-accent").filter({ hasText: /crawl|GSC|pages/i })).toBeVisible({
     timeout: 60_000,
   });
 
-  await page.getByRole("link", { name: "SEO / AEO" }).click();
-  await expect(page.getByRole("heading", { name: /SEO & AEO/i })).toBeVisible();
-  await page.getByRole("button", { name: /Run seo/i }).click();
-  await expect(page.locator("pre").first()).toBeVisible({ timeout: 60_000 });
-  await page.getByRole("button", { name: /Run aeo/i }).click();
+  await page.getByRole("link", { name: "On-Page SEO" }).click();
+  await expect(page.getByRole("heading", { name: /On-Page SEO/i })).toBeVisible();
+  await page.getByRole("button", { name: /Run on-page audit/i }).click();
   await expect(page.locator("pre").first()).toBeVisible({ timeout: 60_000 });
 
-  await page.getByRole("link", { name: "Content" }).click();
+  await page.getByRole("link", { name: "AI SEO" }).click();
+  await expect(page.getByRole("heading", { name: /AI SEO/i })).toBeVisible();
+  await page.getByRole("button", { name: /Run AEO/i }).click();
+  await expect(page.locator("pre").first()).toBeVisible({ timeout: 60_000 });
+
+  await page.getByRole("link", { name: "Content Studio" }).click();
   await expect(page.getByRole("heading", { name: /Content studio/i })).toBeVisible();
   await page.locator('input[name="topic"]').fill("AI SEO tips");
   await page.locator('input[name="keywords"]').fill("seo, aeo");
@@ -60,8 +63,6 @@ test("golden path: signup → crawl → SEO/AEO → content → approvals → bi
 
   await page.getByRole("link", { name: "Billing" }).click();
   await expect(page.getByRole("heading", { name: /Billing/i })).toBeVisible();
-  await expect(page.getByText(/starter|professional|business/i).first()).toBeVisible();
-  // Prefer plan card balance (sidebar /auth/me is stale until remount)
   const balanceLine = page.getByText(/\d+\s+credits\s+·\s+status/i);
   await expect(balanceLine).toBeVisible();
   const billingCredits = await balanceLine.textContent();

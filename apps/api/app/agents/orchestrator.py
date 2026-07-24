@@ -37,8 +37,11 @@ CREDIT_COSTS = {
     "backlink": 25,
     "ppc": 30,
     "local_seo": 20,
+    "cro": 25,
+    "email": 20,
     "supervisor": 5,
     "launch_product": 80,
+    "growth_playbook": 120,
 }
 
 
@@ -631,9 +634,90 @@ async def run_local_seo_agent(db: AsyncSession, run: AgentRun) -> dict[str, Any]
     }
 
 
-async def run_supervisor_workflow(db: AsyncSession, parent: AgentRun, site: Site | None) -> dict[str, Any]:
-    """Phase 3 multi-agent: keyword → content → aeo → social → analytics."""
-    steps = ["keyword", "content", "aeo", "social", "analytics"]
+async def run_cro_agent(db: AsyncSession, run: AgentRun, site: Site | None) -> dict[str, Any]:
+    """CRO briefs: funnel, LPO, A/B tests, exit-intent — recommendations only."""
+    domain = site.domain if site else "your-site"
+    payload = run.input_payload or {}
+    result = {
+        "domain": domain,
+        "funnel_strategy": [
+            "Clarify primary CTA above the fold",
+            "Reduce form fields to email + intent",
+            "Add social proof near pricing",
+        ],
+        "landing_page_optimisations": [
+            f"Rewrite hero for {payload.get('offer', run.goal)}",
+            "Add sticky mobile CTA",
+            "Match ad keyword to H1",
+        ],
+        "ab_tests": [
+            {"name": "Hero CTA copy", "variants": ["Start free audit", "Get SEO score"]},
+            {"name": "Pricing layout", "variants": ["3-tier cards", "Single featured plan"]},
+        ],
+        "exit_intent": {
+            "trigger": "mouseleave",
+            "offer": "Free technical SEO checklist PDF",
+            "channel": "email_capture",
+        },
+        "heatmap_note": "Connect Hotjar/Clarity later — DigiSEO ships CRO briefs, not heatmap hardware.",
+    }
+    artifact = AgentArtifact(
+        agent_run_id=run.id,
+        organization_id=run.organization_id,
+        artifact_type="cro_brief",
+        title=f"CRO brief — {domain}",
+        data=result,
+    )
+    db.add(artifact)
+    await db.flush()
+    return result
+
+
+async def run_email_agent(db: AsyncSession, run: AgentRun) -> dict[str, Any]:
+    """Email marketing sequences and newsletter briefs (ESP connect later)."""
+    payload = run.input_payload or {}
+    topic = payload.get("topic") or run.goal or "SEO growth"
+    result = {
+        "campaigns": [
+            {
+                "name": f"{topic} — welcome series",
+                "type": "drip",
+                "emails": [
+                    {"day": 0, "subject": f"Your {topic} kickoff", "body": "Welcome + audit CTA"},
+                    {"day": 3, "subject": "3 quick wins this week", "body": "On-page checklist"},
+                    {"day": 7, "subject": "See what competitors changed", "body": "Competitor digest"},
+                ],
+            },
+            {
+                "name": f"{topic} newsletter",
+                "type": "newsletter",
+                "cadence": "monthly",
+                "subject_lines": [f"{topic} insights", "What ranked this month"],
+            },
+        ],
+        "segmentation": ["trial", "paying", "churn_risk", "local_intent"],
+        "ab_tests": ["subject line", "send time", "CTA placement"],
+        "esp_note": "Connect SendGrid/Mailchimp under Settings — drafts stay in DigiSEO until synced.",
+    }
+    artifact = AgentArtifact(
+        agent_run_id=run.id,
+        organization_id=run.organization_id,
+        artifact_type="email_brief",
+        title=f"Email plan — {topic}",
+        data=result,
+    )
+    db.add(artifact)
+    await db.flush()
+    return result
+
+
+async def _run_step_chain(
+    db: AsyncSession,
+    parent: AgentRun,
+    site: Site | None,
+    steps: list[str],
+    workflow_id: str,
+) -> dict[str, Any]:
     results: dict[str, Any] = {}
     for step in steps:
         child = AgentRun(
@@ -658,7 +742,36 @@ async def run_supervisor_workflow(db: AsyncSession, parent: AgentRun, site: Site
             child.status = AgentRunStatus.FAILED
             child.error = str(exc)
             results[step] = {"error": str(exc)}
-    return {"workflow": "launch_product", "steps": results}
+    return {"workflow": workflow_id, "steps": results, "hierarchy": steps}
+
+
+async def run_supervisor_workflow(db: AsyncSession, parent: AgentRun, site: Site | None) -> dict[str, Any]:
+    """Launch product: keyword → content → aeo → social → analytics."""
+    return await _run_step_chain(
+        db,
+        parent,
+        site,
+        ["keyword", "content", "aeo", "social", "analytics"],
+        "launch_product",
+    )
+
+
+async def run_growth_playbook(db: AsyncSession, parent: AgentRun, site: Site | None) -> dict[str, Any]:
+    """Subhash hierarchy: Audit → AI/On-Page → Content → CRO → Off-Page/Local → Paid/SMM → Report."""
+    steps = [
+        "seo",
+        "aeo",
+        "keyword",
+        "content",
+        "cro",
+        "backlink",
+        "local_seo",
+        "ppc",
+        "social",
+        "email",
+        "analytics",
+    ]
+    return await _run_step_chain(db, parent, site, steps, "growth_playbook")
 
 
 async def dispatch_agent(db: AsyncSession, run: AgentRun, site: Site | None) -> dict[str, Any]:
@@ -666,7 +779,6 @@ async def dispatch_agent(db: AsyncSession, run: AgentRun, site: Site | None) -> 
     if agent == "seo":
         if not site:
             raise ValueError("site_id required for SEO agent")
-        # ensure relationship for robots check
         await db.refresh(site, attribute_names=["crawls"])
         return await run_seo_agent(db, run, site)
     if agent == "aeo":
@@ -689,8 +801,14 @@ async def dispatch_agent(db: AsyncSession, run: AgentRun, site: Site | None) -> 
         return await run_ppc_agent(db, run)
     if agent == "local_seo":
         return await run_local_seo_agent(db, run)
+    if agent == "cro":
+        return await run_cro_agent(db, run, site)
+    if agent == "email":
+        return await run_email_agent(db, run)
     if agent in ("supervisor", "launch_product", "multi_agent"):
         return await run_supervisor_workflow(db, run, site)
+    if agent == "growth_playbook":
+        return await run_growth_playbook(db, run, site)
     raise ValueError(f"Unknown agent: {agent}")
 
 

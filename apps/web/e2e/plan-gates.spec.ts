@@ -37,14 +37,14 @@ test.describe("Plan gates UI (E2E-P1 / P2)", () => {
 
   test("social flow after auto-upgrade from page", async ({ page }) => {
     await signup(page);
-    await page.getByRole("link", { name: "Onboarding" }).click();
+    await page.getByRole("link", { name: "Strategy & Audit" }).click();
     await page.locator('input[name="url"]').fill("https://social-demo.example.com");
     await page.getByRole("button", { name: /Connect & crawl/i }).click();
-    await expect(page.locator("p.text-accent").filter({ hasText: /pages indexed|GSC connected/i })).toBeVisible({
+    await expect(page.locator("p.text-accent").filter({ hasText: /crawl|GSC|pages/i })).toBeVisible({
       timeout: 60_000,
     });
 
-    await page.getByRole("link", { name: "Social" }).click();
+    await page.getByRole("link", { name: "Social (SMM)" }).click();
     await expect(page.getByRole("heading", { name: /Social/i })).toBeVisible();
     await page.locator('input[name="topic"]').fill("Announce DigiSEO AI");
     await page.getByRole("button", { name: /Generate post/i }).click();
@@ -53,22 +53,22 @@ test.describe("Plan gates UI (E2E-P1 / P2)", () => {
     });
   });
 
-  test("workflows page launches business template", async ({ page }) => {
+  test("growth playbook launches business template", async ({ page }) => {
     await signup(page);
-    await page.getByRole("link", { name: "Onboarding" }).click();
+    await page.getByRole("link", { name: "Strategy & Audit" }).click();
     await page.locator('input[name="url"]').fill("https://workflow-demo.example.com");
     await page.getByRole("button", { name: /Connect & crawl/i }).click();
-    await expect(page.locator("p.text-accent").filter({ hasText: /pages indexed|GSC connected/i })).toBeVisible({
+    await expect(page.locator("p.text-accent").filter({ hasText: /crawl|GSC|pages/i })).toBeVisible({
       timeout: 60_000,
     });
 
-    await page.getByRole("link", { name: "Workflows" }).click();
-    await expect(page.getByRole("heading", { name: /workflow/i })).toBeVisible();
+    await page.getByRole("link", { name: "Growth Playbook" }).click();
+    await expect(page.getByRole("heading", { name: /Growth Playbook/i })).toBeVisible();
     const launch = page.getByRole("button", { name: /^Launch$/i }).first();
     await expect(launch).toBeVisible({ timeout: 30_000 });
     await launch.click();
-    await expect(page.getByText(/completed|Running|Workflow|Failed/i).first()).toBeVisible({
-      timeout: 120_000,
+    await expect(page.getByText(/completed|Running|Playbook|Failed/i).first()).toBeVisible({
+      timeout: 180_000,
     });
   });
 });

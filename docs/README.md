@@ -8,6 +8,7 @@
 | [architecture/DIAGRAMS.md](architecture/DIAGRAMS.md) | Mermaid diagram pack (context, sequence, ER, deploy) |
 | [architecture/README.md](architecture/README.md) | Architecture folder overview |
 | [agents/README.md](agents/README.md) | Agent catalog and contracts |
+| [strategy/SERVICE_PILLARS.md](strategy/SERVICE_PILLARS.md) | Subhash service taxonomy & hierarchy |
 | [deploy/RAILWAY.md](deploy/RAILWAY.md) | Railway deployment guide |
 | [testing/E2E_TEST_PLAN.md](testing/E2E_TEST_PLAN.md) | End-to-end test cases (UI + API) |
 | [testing/README.md](testing/README.md) | How to run Playwright and pytest |

@@ -2,16 +2,23 @@
 
 See `packages/agent-sdk` for programmatic contracts.
 
-| Agent | Credits | Approval | Phase |
-|-------|---------|----------|-------|
-| seo | 25 | yes | 1 |
-| aeo | 20 | yes | 1 |
-| content | 40 | draft only | 1 |
-| keyword | 15 | no | 1 |
-| social | 10 | yes (publish) | 2 |
-| competitor | 20 | no | 2 |
-| analytics | 10 | no | 2 |
-| backlink | 25 | yes (send) | 3 |
-| ppc | 30 | draft | 3 |
-| local_seo | 20 | yes | 3 |
-| launch_product | 80 | per step | 3 |
+Service pillars (Subhash taxonomy) map to agents below. Competitor, keywords, backlinks, and analytics are **capabilities inside pillars**, not peer products.
+
+| Agent | Credits | Approval | Pillar | Plan |
+|-------|---------|----------|--------|------|
+| seo | 25 | yes | On-Page / Strategy | Starter+ |
+| aeo | 20 | yes | AI SEO | Starter+ |
+| keyword | 15 | no | Strategy / AI SEO | Starter+ |
+| content | 40 | draft only | Content Studio | Starter+ |
+| cro | 25 | no | CRO | Professional+ |
+| social | 10 | yes (publish) | SMM | Professional+ |
+| competitor | 20 | no | Strategy / AI SEO | Professional+ |
+| analytics | 10 | no | Reporting | Professional+ |
+| backlink | 25 | yes (send) | Off-Page | Business+ |
+| ppc | 30 | draft | Paid Media (Google/Meta/LinkedIn) | Business+ |
+| local_seo | 20 | yes | Local SEO (GMB) | Business+ |
+| email | 20 | no | Email Marketing | Business+ |
+| launch_product | 80 | per step | Growth Playbook (lite) | Business+ |
+| growth_playbook | 120 | per step | Full hierarchy playbook | Business+ |
+
+**Out of core product:** Web Design & Development — partner brief export only (Settings).

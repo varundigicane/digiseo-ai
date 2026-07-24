@@ -22,8 +22,11 @@ async def run_agent(body: AgentRunRequest, auth: CurrentAuth, db: DbSession):
         "backlink": "backlink",
         "ppc": "ppc",
         "local_seo": "local_seo",
+        "cro": "cro",
+        "email": "email",
         "supervisor": "multi_agent",
         "launch_product": "multi_agent",
+        "growth_playbook": "multi_agent",
         "multi_agent": "multi_agent",
     }
     feat = feature_map.get(body.agent, body.agent)
