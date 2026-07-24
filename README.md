@@ -97,12 +97,6 @@ cd apps/api
 pip install -r requirements.txt -r requirements-dev.txt
 python -m pytest tests -q
 # or from root: npm run test:api
-
-# UI E2E (Playwright) — start API on :8000 first
-cd apps/web
-npm install
-npx playwright install chromium
-npm run test:e2e
 ```
 
 ## License

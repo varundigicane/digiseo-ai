@@ -1,6 +1,6 @@
 # DigiSEO AI — End-to-End Test Plan
 
-**Stack:** Playwright (UI) · pytest + httpx (API) · local mock mode (`MOCK_LLM=true`, `MOCK_CRAWL=true`)  
+**Stack:** Manual UI checks · pytest + httpx (API) · local mock mode (`MOCK_LLM=true`, `MOCK_CRAWL=true`)  
 **Targets:** Web `http://localhost:3000` · API `http://localhost:8000`  
 **Traceability:** Use cases in [../functional/FUNCTIONAL_SPEC.md](../functional/FUNCTIONAL_SPEC.md)
 
@@ -15,21 +15,11 @@ pip install -r requirements.txt -r requirements-dev.txt
 # Prefer project venv if present:
 # .venv\Scripts\python.exe -m pytest tests -q
 python -m pytest tests -q
-
-# UI E2E — Playwright starts DigiSEO web on :3010 (avoids clashing with other apps on :3000)
-# Terminal 1: API with mock mode + CORS for :3010
-cd apps/api
-set MOCK_LLM=true
-set MOCK_CRAWL=true
-set CORS_ORIGINS=http://127.0.0.1:3010,http://localhost:3010
-uvicorn app.main:app --port 8000
-# Terminal 2:
-cd apps/web
-npx playwright install chromium
-npx playwright test
 ```
 
-From monorepo root: `npm run test:api` · `npm run test:e2e`
+From monorepo root: `npm run test:api`
+
+UI cases below are exercised manually (Playwright was removed from `apps/web`).
 
 ---
 
@@ -49,17 +39,17 @@ From monorepo root: `npm run test:api` · `npm run test:e2e`
 
 | ID | Type | UC | Steps | Expected | Automation |
 |----|------|-----|-------|----------|------------|
-| E2E-P0-01 | UI | UC-01 | Landing → Signup | `/app`; sidebar starter; credits ~500 | `e2e/auth.spec.ts` |
-| E2E-P0-02 | UI | UC-01 | Sign out → Login | `/app`; session restored | `e2e/auth.spec.ts` |
-| E2E-P0-03 | UI | — | Invalid login | Stay `/login`; error; no session | `e2e/auth.spec.ts` |
-| E2E-P0-04 | UI | — | `/app` without session | Redirect `/login` | `e2e/auth.spec.ts` |
-| E2E-P0-05 | UI+API | UC-02 | Onboarding connect & crawl | Crawl completed; pages/issues | `e2e/critical-path.spec.ts`, API happy path |
+| E2E-P0-01 | UI | UC-01 | Landing → Signup | `/app`; sidebar starter; credits ~500 | Manual |
+| E2E-P0-02 | UI | UC-01 | Sign out → Login | `/app`; session restored | Manual |
+| E2E-P0-03 | UI | — | Invalid login | Stay `/login`; error; no session | Manual |
+| E2E-P0-04 | UI | — | `/app` without session | Redirect `/login` | Manual |
+| E2E-P0-05 | UI+API | UC-02 | Onboarding connect & crawl | Crawl completed; pages/issues | Manual + API happy path |
 | E2E-P0-06 | UI+API | UC-03 | Run SEO | Completed; score/issues; credits −~25 | critical-path + API |
 | E2E-P0-07 | UI+API | UC-04 | Run AEO | Completed; credits −~20 | critical-path + API |
 | E2E-P0-08 | UI+API | UC-08 | Run keyword | Clusters; credits −~15 | API |
 | E2E-P0-09 | UI+API | UC-05 | Generate blog | Draft listed | critical-path + API |
 | E2E-P0-10 | UI+API | UC-06 | Approve change request | `approved` (or `applied` if auto) | critical-path + API |
-| E2E-P0-11 | UI | UC-07 | Billing + mock upgrade | Starter shown; upgrade to professional | `e2e/plan-gates.spec.ts` |
+| E2E-P0-11 | UI | UC-07 | Billing + mock upgrade | Starter shown; upgrade to professional | Manual |
 | E2E-P0-12 | API | — | `GET /sites` no auth | 401 | `tests/test_p0_happy_path.py` |
 | E2E-P0-13 | API | — | Wrong `X-Org-Id` | 403 | `tests/test_p0_happy_path.py` |
 | E2E-P0-14 | API | UC-01–06 | signup→site→crawl→seo→review | Full API chain | `tests/test_p0_happy_path.py` |
@@ -72,9 +62,9 @@ From monorepo root: `npm run test:api` · `npm run test:e2e`
 
 | ID | Type | Steps | Expected | Automation |
 |----|------|-------|----------|------------|
-| E2E-P1-01 | UI+API | Starter hits social/competitor APIs | 403 feature locked | `tests/test_plan_gates.py`, `e2e/plan-gates.spec.ts` |
+| E2E-P1-01 | UI+API | Starter hits social/competitor APIs | 403 feature locked | `tests/test_plan_gates.py`, Manual |
 | E2E-P1-02 | API | Mock checkout → professional | Tier + 2000 credits | `tests/test_plan_gates.py` |
-| E2E-P1-03 | UI+API | Social generate → publish | Posts published | `e2e/plan-gates.spec.ts`, API |
+| E2E-P1-03 | UI+API | Social generate → publish | Posts published | Manual, API |
 | E2E-P1-04 | API | Calendar seed | Items returned | `tests/test_p1_p2.py` |
 | E2E-P1-05 | API | Competitor add → scan → events | Events non-empty | `tests/test_p1_p2.py` |
 | E2E-P1-06 | API | Analytics dashboard | Report/metrics | `tests/test_p1_p2.py` |

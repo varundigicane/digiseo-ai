@@ -7,9 +7,7 @@
     "prebuild": "node -e \"const fs=require('fs'); for (const p of ['src/app/app/strategy/page.tsx','src/app/app/ai-seo/page.tsx','src/app/app/playbook/page.tsx']) fs.accessSync(p); if (!fs.readFileSync('src/app/page.tsx','utf8').includes('AI Growth OS')) process.exit(1);\"",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "15.1.11",
@@ -18,7 +16,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@playwright/test": "^1.50.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
