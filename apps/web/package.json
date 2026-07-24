@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node -e \"const fs=require('fs'); for (const p of ['src/app/app/strategy/page.tsx','src/app/app/ai-seo/page.tsx','src/app/app/playbook/page.tsx']) fs.accessSync(p); if (!fs.readFileSync('src/app/page.tsx','utf8').includes('AI Growth OS')) process.exit(1);\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
